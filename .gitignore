@@ -1,0 +1,31 @@
+# Emacs backup files
+*~
+\#*\#/
+.\#*
+*.elc
+
+# Byte-compiled / dynamic loading files
+*.elc
+
+# Package files
+*.tar
+*.tar.gz
+*.tar.bz2
+*.zip
+
+# Directory tracking files
+.dir-locals.el
+
+# Testing
+ert-temp-*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

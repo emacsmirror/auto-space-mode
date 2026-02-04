@@ -3,7 +3,7 @@
 
 * What is auto-space-mode?
 
-=auto-space-mode= is a package that automatically adds spaces between Chinese characters and English words. This behavior ONLY occurs during input.
+=auto-space-mode= is a package that automatically adds spaces between CJK (Chinese, Japanese, Korean) characters and ASCII words. This behavior ONLY occurs during input.
 
 * How to use auto-space-mode?
 
@@ -14,13 +14,13 @@ Simply download =auto-space-mode.el= and place it in your Emacs =load-path= dire
 (auto-space-mode t)
 #+end_src
 
-You can also use =add-space-between-chinese-and-english-in-region= and =remove-space-between-chinese-and-english-in-region= to add or remove spaces in a region.
+You can also use =auto-space-add-in-region= and =auto-space-remove-in-region= to add or remove spaces in a region.
 
 * What is the difference between auto-space-mode and pangu-spacing?
 
 There is another package [[https://github.com/coldnew/pangu-spacing][pangu-spacing]], that provides similar functionality. The differences between auto-space-mode and pangu-spacing are:
 
-1. =auto-space-mode= ONLY adds spaces during input; it does NOT modify other parts of your document.
+1. =auto-space-mode= ONLY adds spaces between CJK and ASCII during input; it does NOT modify other parts of your document.
 2. =auto-space-mode= adds ACTUAL spaces instead of using overlays
 3. You can FREELY add or remove those spaces.
 

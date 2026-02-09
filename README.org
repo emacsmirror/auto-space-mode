@@ -1,17 +1,21 @@
 # -*- org-export-babel-evaluate: nil -*-
 #+TITLE: auto-space-mode
 
+[[https://melpa.org/#/auto-space-mode][file:https://melpa.org/packages/auto-space-mode-badge.svg]]
+
 * What is auto-space-mode?
 
 =auto-space-mode= is a package that automatically adds spaces between CJK (Chinese, Japanese, Korean) characters and ASCII words. This behavior ONLY occurs during input.
 
 * How to use auto-space-mode?
 
-Simply download =auto-space-mode.el= and place it in your Emacs =load-path= directory. Then, add the following to your config file:
+Install from MELPA:
 
 #+begin_src emacs-lisp
-(require 'auto-space-mode)
-(auto-space-mode t)
+(use-package auto-space-mode
+  :ensure t
+  :config
+  (auto-space-mode t))
 #+end_src
 
 You can also use =auto-space-add-in-region= and =auto-space-remove-in-region= to add or remove spaces in a region.

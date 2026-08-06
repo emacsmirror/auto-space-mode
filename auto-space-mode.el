@@ -27,6 +27,7 @@
 ;; auto-space-mode automatically adds spaces between CJK characters
 ;; (Chinese, Japanese, Korean) and ASCII words during input.  This behavior
 ;; ONLY occurs during input and does NOT modify other parts of your document.
+;; File name and path input in the minibuffer is left unchanged.
 ;;
 ;; To use auto-space-mode, add the following to your init file:
 ;;
@@ -87,26 +88,28 @@ This includes ASCII letters, numbers, and some punctuation."
 
 (defun auto-space--add-space-between-cjk-and-ascii ()
   "Automatically add a space between CJK and ASCII characters.
-This function is intended to be used in `post-self-insert-hook'."
-  (let ((current-char (char-before))
-        (prev-char (char-before (1- (point))))
-        (next-char (char-after)))
-    ;; Check if we need to insert space before current character
-    (when (and current-char prev-char
-               (or (and (auto-space--cjk-p prev-char) (auto-space--halfwidth-p current-char))
-                   (and (auto-space--halfwidth-p prev-char) (auto-space--cjk-p current-char)))
-               (not (eq prev-char ?\s)))
-      (save-excursion
-        (goto-char (1- (point)))
-        (insert " ")))
-    ;; Check if we need to insert space after current character
-    (when (and current-char next-char
-               (or (and (auto-space--cjk-p current-char) (auto-space--halfwidth-p next-char))
-                   (and (auto-space--halfwidth-p current-char) (auto-space--cjk-p next-char)))
-               (not (eq current-char ?\s)))
-      (save-excursion
-        (goto-char (point))
-        (insert " ")))))
+This function is intended to be used in `post-self-insert-hook'.
+Do nothing while the minibuffer is completing a file name."
+  (unless (and (minibufferp) minibuffer-completing-file-name)
+    (let ((current-char (char-before))
+          (prev-char (char-before (1- (point))))
+          (next-char (char-after)))
+      ;; Check if we need to insert space before current character
+      (when (and current-char prev-char
+                 (or (and (auto-space--cjk-p prev-char) (auto-space--halfwidth-p current-char))
+                     (and (auto-space--halfwidth-p prev-char) (auto-space--cjk-p current-char)))
+                 (not (eq prev-char ?\s)))
+        (save-excursion
+          (goto-char (1- (point)))
+          (insert " ")))
+      ;; Check if we need to insert space after current character
+      (when (and current-char next-char
+                 (or (and (auto-space--cjk-p current-char) (auto-space--halfwidth-p next-char))
+                     (and (auto-space--halfwidth-p current-char) (auto-space--cjk-p next-char)))
+                 (not (eq current-char ?\s)))
+        (save-excursion
+          (goto-char (point))
+          (insert " "))))))
 
 ;;;; Obsolete function aliases for backward compatibility
 
@@ -223,7 +226,8 @@ Works on region from START to END."
 When enabled, automatically adds spaces between CJK characters
 \(Chinese, Japanese, Korean) and ASCII words during input.
 This behavior ONLY occurs during input and does NOT modify
-other parts of your document.
+other parts of your document.  File name and path input in the
+minibuffer is left unchanged.
 
 \\{auto-space-mode-map}"
   :lighter " Auto-Space"

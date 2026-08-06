@@ -5,7 +5,7 @@
 
 * What is auto-space-mode?
 
-=auto-space-mode= is a package that automatically adds spaces between CJK (Chinese, Japanese, Korean) characters and ASCII words. This behavior ONLY occurs during input.
+=auto-space-mode= is a package that automatically adds spaces between CJK (Chinese, Japanese, Korean) characters and ASCII words. This behavior ONLY occurs during input. It leaves file names and paths unchanged when they are entered in the minibuffer.
 
 * How to use auto-space-mode?
 
